@@ -1,5 +1,5 @@
 "use client"
-
+import { Outlet } from "react-router-dom"
 import DashboardLayout from "../../components/layout/DashboardLayout"
 import { useAuth } from "../../context/AuthContext"
 import { motion } from "framer-motion"
@@ -37,19 +37,20 @@ const UserDashboard = () => {
     {
       name: "Browse Rooms",
       description: "View all available rooms",
-      href: "/user/rooms",
+      href: "/dashboard/user/rooms",
     },
     {
       name: "Book a Room",
       description: "Make a new reservation",
-      href: "/user/book",
+      href: "/dashboard/user/book",
     },
     {
       name: "View Bookings",
       description: "Check your current bookings",
-      href: "/user/bookings",
+      href: "/dashboard/user/bookings",
     },
   ]
+  
 
   return (
     <DashboardLayout>
@@ -113,6 +114,7 @@ const UserDashboard = () => {
           </div>
         </div>
       </div>
+      <Outlet />
     </DashboardLayout>
   )
 }

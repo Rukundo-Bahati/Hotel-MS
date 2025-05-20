@@ -18,7 +18,7 @@ import {
   DollarSign,
   Star,
 } from "lucide-react"
-import { useToast } from "../../../src/hooks/use-toast"
+import { useToast } from "@/hooks/use-toast"
 
 // Mock data for rooms
 const mockRooms = [

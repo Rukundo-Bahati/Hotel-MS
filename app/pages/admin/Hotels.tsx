@@ -6,7 +6,7 @@ import { useState } from "react"
 import DashboardLayout from "../../components/layout/DashboardLayout"
 import { motion } from "framer-motion"
 import { Plus, Edit, Trash, X, Search, MapPin, Star, Phone, Filter, SlidersHorizontal, ChevronDown } from "lucide-react"
-import { useToast } from "../../../src/hooks/use-toast"
+import { useToast } from "@/hooks/use-toast"
 
 // Mock hotels data
 const hotelsData = [

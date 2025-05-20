@@ -6,7 +6,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useAuth } from "../../context/AuthContext"
 import { motion } from "framer-motion"
-import { useToast } from "../../../src/hooks/use-toast"
+import { useToast } from "@/hooks/use-toast"
 
 const Register = () => {
   const [username, setUsername] = useState("")

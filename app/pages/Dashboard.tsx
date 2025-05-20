@@ -7,6 +7,7 @@ import { useAuth } from "../context/AuthContext";
 const Dashboard = () => {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth();
+  const location = window.location.pathname;
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -14,14 +15,17 @@ const Dashboard = () => {
       return;
     }
 
-    if (user?.role === "ADMIN") {
-      navigate("/dashboard/admin");
-    } else if (user?.role === "USER") {
-      navigate("/dashboard/user");
-    } else {
-      navigate("/login");
+    // Only redirect if we're at the root dashboard path
+    if (location === "/dashboard") {
+      if (user?.role === "ADMIN") {
+        navigate("/dashboard/admin");
+      } else if (user?.role === "USER") {
+        navigate("/dashboard/user");
+      } else {
+        navigate("/login");
+      }
     }
-  }, [navigate, user, isAuthenticated]);
+  }, [navigate, user, isAuthenticated, location]);
 
   return <Outlet />;
 };

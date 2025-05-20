@@ -4,7 +4,7 @@ import { useState } from "react"
 import DashboardLayout from "@/app/components/layout/DashboardLayout"
 import { motion } from "framer-motion"
 import { Calendar, Clock, X, Eye, AlertCircle, Search, Filter, SlidersHorizontal, ChevronDown } from "lucide-react"
-import { useToast } from "../../../src/hooks/use-toast"
+import { useToast } from "@/hooks/use-toast"
 
 interface Booking {
   id: number

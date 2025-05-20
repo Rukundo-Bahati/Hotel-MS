@@ -4,7 +4,7 @@ import { SetStateAction, useState } from "react"
 import DashboardLayout from "../../components/layout/DashboardLayout"
 import { motion } from "framer-motion"
 import { Calendar, Clock, X, Eye, AlertCircle, Search, Filter, SlidersHorizontal, ChevronDown, Check, Hotel, User } from 'lucide-react'
-import { useToast } from "../../../src/hooks/use-toast"
+import { useToast } from "@/hooks/use-toast"
 
 // Mock bookings data
 const bookingsData = [
@@ -254,7 +254,7 @@ const AdminBookings = () => {
       toast({
         title: "Status updated",
         description: `Booking status has been updated to ${newStatus}.`,
-        variant: "success",
+        variant: "default",
       })
     }
   }
@@ -294,17 +294,13 @@ const AdminBookings = () => {
         newFilters.priceRange = value as [number, number]
       } else {
         // For array-based filters (status, hotels, paymentMethod)
-        if ((newFilters[filterType as keyof typeof newFilters] as string[]).includes(value)) {
-          // Remove the value if it's already selected
-          if (Array.isArray(newFilters[filterType as keyof typeof newFilters])) {
-            newFilters[filterType as keyof typeof newFilters] = (newFilters[filterType as keyof typeof newFilters] as string[]).filter((item) => item !== value);
+        if (filterType === 'status' || filterType === 'hotels' || filterType === 'paymentMethod') {
+          const currentFilters = newFilters[filterType] as string[];
+          if (currentFilters.includes(value as string)) {
+            newFilters[filterType] = currentFilters.filter(item => item !== value) as any;
+          } else {
+            newFilters[filterType] = [...currentFilters, value as string] as any;
           }
-        } else {
-          // Add the value if it's not already selected
-          newFilters[filterType as keyof typeof newFilters] = [
-            ...(newFilters[filterType as keyof typeof newFilters] as string[]),
-            value,
-          ]
         }
       }
 
@@ -313,7 +309,7 @@ const AdminBookings = () => {
   }
 
   // Handle sort changes
-  const handleSortChange = (option: string[] | SetStateAction<string>) => {
+  const handleSortChange = (option: string) => {
     if (sortOption === option) {
       // Toggle direction if clicking the same option
       setSortDirection(sortDirection === "asc" ? "desc" : "asc")
@@ -396,7 +392,12 @@ const AdminBookings = () => {
                 <button
                   type="button"
                   className="flex items-center justify-between w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
-                  onClick={() => document.getElementById("sort-dropdown").classList.toggle("hidden")}
+                  onClick={() => {
+                    const element = document.getElementById("sort-dropdown");
+                    if (element) {
+                      element.classList.toggle("hidden");
+                    }
+                  }}
                 >
                   <span className="flex items-center">
                     <SlidersHorizontal className="h-5 w-5 mr-2" />

@@ -4,7 +4,7 @@ import { useState } from "react"
 import DashboardLayout from "../../components/layout/DashboardLayout"
 import { motion } from "framer-motion"
 import { Plus, Edit, Trash, X, Search, Filter, ChevronDown, Eye } from "lucide-react"
-import { useToast } from "../../../src/hooks/use-toast"
+import { useToast } from "@/hooks/use-toast"
 import type React from "react"
 
 // Mock users data

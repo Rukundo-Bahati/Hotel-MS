@@ -11,6 +11,12 @@ import Rooms from "../pages/user/Rooms"
 import BookRoom from "../pages/user/BookRoom"
 import UserBookings from "../pages/user/Bookings"
 
+// Admin pages
+import AdminHotels from "../pages/admin/Hotels"
+import AdminRooms from "../pages/admin/Rooms"
+import AdminBookings from "../pages/admin/Bookings"
+import AdminAllUsers from "../pages/admin/User"
+
 const AppRoutes = () => {
   const { isAuthenticated, user } = useAuth()
 
@@ -28,8 +34,12 @@ const AppRoutes = () => {
         <Route path="user/book" element={<ProtectedRoute allowedRoles={["USER", "ADMIN"]}><BookRoom /></ProtectedRoute>} />
         <Route path="user/bookings" element={<ProtectedRoute allowedRoles={["USER", "ADMIN"]}><UserBookings /></ProtectedRoute>} />
 
-        {/* Admin Dashboard */}
+        {/* Admin Dashboard + Nested Pages */}
         <Route path="admin" element={<ProtectedRoute allowedRoles={["ADMIN"]}><AdminDashboard /></ProtectedRoute>} />
+        <Route path="admin/hotels" element={<ProtectedRoute allowedRoles={["ADMIN"]}><AdminHotels /></ProtectedRoute>} />
+        <Route path="admin/rooms" element={<ProtectedRoute allowedRoles={["ADMIN"]}><AdminRooms /></ProtectedRoute>} />
+        <Route path="admin/bookings" element={<ProtectedRoute allowedRoles={["ADMIN"]}><AdminBookings /></ProtectedRoute>} />
+        <Route path="admin/users" element={<ProtectedRoute allowedRoles={["ADMIN"]}><AdminAllUsers /></ProtectedRoute>} />
       </Route>
 
       {/* Default */}
