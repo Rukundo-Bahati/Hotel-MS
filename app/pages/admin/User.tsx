@@ -8,7 +8,7 @@ import { useToast } from "@/hooks/use-toast"
 import type React from "react"
 
 // Mock users data
-const usersData = [
+const usersData:User[] = [
   {
     id: 1,
     username: "johndoe",
@@ -109,7 +109,7 @@ interface User {
 }
 
 // Get unique values for filters
-const getUniqueValues = (data, key) => {
+const getUniqueValues = (data: User[], key: keyof User) => {
   return [...new Set(data.map((item) => item[key]))]
 }
 
@@ -121,17 +121,20 @@ const AdminUsers = () => {
   const [isViewModalOpen, setIsViewModalOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
   const [showFilters, setShowFilters] = useState(false)
-  const [filters, setFilters] = useState({
+  // --- FIX: Explicitly type filters state ---
+  const [filters, setFilters] = useState<{
+    role: string[]
+    status: string[]
+    registrationDateRange: { start: string; end: string }
+    bookingsCountRange: [number, number]
+  }>({
     role: [],
     status: [],
-    registrationDateRange: {
-      start: "",
-      end: "",
-    },
+    registrationDateRange: { start: "", end: "" },
     bookingsCountRange: [0, 10],
   })
   const [sortOption, setSortOption] = useState("registrationDate")
-  const [sortDirection, setSortDirection] = useState("desc")
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc")
   const [formData, setFormData] = useState<Partial<User>>({
     username: "",
     name: "",
@@ -259,7 +262,7 @@ const AdminUsers = () => {
 
     if (selectedUser) {
       // Update existing user
-      setUsers(users.map((user) => (user.id === selectedUser ? { ...user, ...formData } : user)))
+      setUsers(users.map((user) => (user.id === selectedUser ? { ...user, ...formData } as User : user)))
       toast({
         title: "User updated successfully!",
       })
@@ -358,7 +361,7 @@ const AdminUsers = () => {
                     }}
                   >
                     {roleOptions.map((role) => (
-                      <option key={role} value={role}>
+                      <option key={role as string} value={role as string}>
                         {role}
                       </option>
                     ))}
@@ -377,7 +380,7 @@ const AdminUsers = () => {
                     }}
                   >
                     {statusOptions.map((status) => (
-                      <option key={status} value={status}>
+                      <option key={status as string} value={status as string}>
                         {status}
                       </option>
                     ))}
