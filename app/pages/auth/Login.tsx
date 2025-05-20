@@ -4,12 +4,12 @@ import type React from "react"
 
 import { useState } from "react"
 import Link from "next/link"
-import { useAuth } from "../context/AuthContext"
+import { useAuth } from "@/app/context/AuthContext"
 
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import { motion } from "framer-motion"
-import { useToast } from "../../hooks/use-toast"
+import { useToast } from "@/src/hooks/use-toast"
 
 const Login = () => {
   const [email, setEmail] = useState("")

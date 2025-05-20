@@ -21,7 +21,12 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
     <div className="flex h-screen bg-gray-100 dark:bg-gray-900">
       {/* Sidebar */}
-      <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+      <div className={`hidden md:block`}>
+        <Sidebar isOpen={true} toggleSidebar={toggleSidebar} />
+      </div>
+      <div className={`md:hidden ${sidebarOpen ? 'block' : 'hidden'}`}>
+        <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+      </div>
 
       {/* Main Content */}
       <div className="flex flex-col flex-1 overflow-hidden">
@@ -36,7 +41,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             transition={{ duration: 0.3 }}
             className="container mx-auto"
           >
-            {children}
+            {children} {/* Ensure children are rendered correctly */}
           </motion.div>
         </main>
       </div>
