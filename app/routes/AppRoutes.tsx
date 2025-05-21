@@ -1,21 +1,23 @@
 import { Routes, Route, Navigate } from "react-router-dom"
 import { useAuth } from "../../app/context/AuthContext"
-import ClientDashboard from "../pages/Dashboard"
-import UserDashboard from "../pages/user/Dashboard"
-import AdminDashboard from "../pages/admin/Dashboard"
+import ClientDashboard from "../Dashboard"
+import UserDashboard from "../user/page"
+import AdminDashboard from "../admin/page"
 import ProtectedRoute from "./ProtectedRoute"
-import Login from "../pages/auth/Login"
-import Register from "../pages/auth/Register"
 
-import Rooms from "../pages/user/Rooms"
-import BookRoom from "../pages/user/BookRoom"
-import UserBookings from "../pages/user/Bookings"
+
+
 
 // Admin pages
-import AdminHotels from "../pages/admin/Hotels"
-import AdminRooms from "../pages/admin/Rooms"
-import AdminBookings from "../pages/admin/Bookings"
-import AdminAllUsers from "../pages/admin/User"
+import AdminHotels from "../admin/hotels/page"
+import AdminRooms from "../admin/rooms/page"
+import AdminBookings from "../admin/bookings/page"
+import AdminAllUsers from "../admin/users/page"
+import Login from "../login/page";
+import Register from "../register/page";
+import UserRooms from "../user/rooms/page";
+import UserBookRoom from "../user/book-room/page";
+import UserBookings from "../user/bookings/page";
 
 const AppRoutes = () => {
   const { isAuthenticated, user } = useAuth()
@@ -30,8 +32,8 @@ const AppRoutes = () => {
       <Route path="/dashboard" element={<ClientDashboard />}>
         {/* User Dashboard + Nested Pages */}
         <Route path="user" element={<ProtectedRoute allowedRoles={["USER", "ADMIN"]}><UserDashboard /></ProtectedRoute>} />
-        <Route path="user/rooms" element={<ProtectedRoute allowedRoles={["USER", "ADMIN"]}><Rooms /></ProtectedRoute>} />
-        <Route path="user/book" element={<ProtectedRoute allowedRoles={["USER", "ADMIN"]}><BookRoom /></ProtectedRoute>} />
+        <Route path="user/rooms" element={<ProtectedRoute allowedRoles={["USER", "ADMIN"]}><UserRooms /></ProtectedRoute>} />
+        <Route path="user/book" element={<ProtectedRoute allowedRoles={["USER", "ADMIN"]}><UserBookRoom /></ProtectedRoute>} />
         <Route path="user/bookings" element={<ProtectedRoute allowedRoles={["USER", "ADMIN"]}><UserBookings /></ProtectedRoute>} />
 
         {/* Admin Dashboard + Nested Pages */}
