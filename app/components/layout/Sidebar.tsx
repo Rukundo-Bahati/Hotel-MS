@@ -70,7 +70,9 @@ const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
           <nav className="flex-1 overflow-y-auto py-4">
             <ul className="space-y-1 px-2">
               {links.map(({ href, icon, label }) => {
-                const isActive = pathname === href || pathname.startsWith(href + "/");
+                const isActive =
+                pathname === href ||
+                (pathname.startsWith(href + "/") && href !== "/admin");              
 
                 return (
                   <li key={href}>
