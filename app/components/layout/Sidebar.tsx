@@ -72,7 +72,7 @@ const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
               {links.map(({ href, icon, label }) => {
                 const isActive =
                 pathname === href ||
-                (pathname.startsWith(href + "/") && href !== "/admin");              
+                (pathname.startsWith(href + "/") && href !== "/admin" && href !== "/user");              
 
                 return (
                   <li key={href}>
