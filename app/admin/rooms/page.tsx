@@ -1,7 +1,6 @@
-
+"use client"
 
 import type React from "react"
-import { useState } from "react"
 import DashboardLayout from "../../components/layout/DashboardLayout"
 import {
   Search,
@@ -19,6 +18,7 @@ import {
   Star,
 } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
+import { useState } from "react";
 
 // Mock data for rooms
 const mockRooms = [

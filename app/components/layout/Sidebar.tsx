@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname,useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, Hotel, Bed, Calendar, Users, X, BookOpen } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
+import { type ReactNode } from "react";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -15,22 +16,23 @@ const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
   const { user } = useAuth();
   const isAdmin = user?.role === "ADMIN";
   const pathname = usePathname();
+  const router = useRouter()
 
-  const base = "/dashboard";
   const userLinks = [
-    { href: `${base}/user`, icon: <Home size={20} />, label: "Dashboard" },
-    { href: `${base}/user/rooms`, icon: <Bed size={20} />, label: "View Rooms" },
-    { href: `${base}/user/book`, icon: <Calendar size={20} />, label: "Book Room" },
-    { href: `${base}/user/bookings`, icon: <BookOpen size={20} />, label: "My Bookings" },
+    { href: "/user", icon: <Home size={20} />, label: "Dashboard" },
+    { href: "/user/rooms", icon: <Bed size={20} />, label: "View Rooms" },
+    { href: "/user/book-room", icon: <Calendar size={20} />, label: "Book Room" },
+    { href: "/user/bookings", icon: <BookOpen size={20} />, label: "My Bookings" },
   ];
-
+  
   const adminLinks = [
-    { href: `${base}/admin`, icon: <Home size={20} />, label: "Dashboard" },
-    { href: `${base}/hotels`, icon: <Hotel size={20} />, label: "Manage Hotels" },
-    { href: `${base}/admin/rooms`, icon: <Bed size={20} />, label: "Manage Rooms" },
-    { href: `${base}/admin/bookings`, icon: <Calendar size={20} />, label: "All Bookings" },
-    { href: `${base}/admin/users`, icon: <Users size={20} />, label: "Manage Users" },
+    { href: "/admin", icon: <Home size={20} />, label: "Dashboard" },
+    { href: "/admin/hotels", icon: <Hotel size={20} />, label: "Manage Hotels" },
+    { href: "/admin/rooms", icon: <Bed size={20} />, label: "Manage Rooms" },
+    { href: "/admin/bookings", icon: <Calendar size={20} />, label: "All Bookings" },
+    { href: "/admin/users", icon: <Users size={20} />, label: "Manage Users" },
   ];
+  
 
   const links = isAdmin ? adminLinks : userLinks;
 
@@ -68,25 +70,25 @@ const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
           <nav className="flex-1 overflow-y-auto py-4">
             <ul className="space-y-1 px-2">
               {links.map(({ href, icon, label }) => {
-                // Determine if this link is active
-                // You can customize this logic as needed
                 const isActive = pathname === href || pathname.startsWith(href + "/");
 
                 return (
                   <li key={href}>
-                    <Link
-                      href={href}
-                      onClick={() => {
-                        if (window.innerWidth < 768) toggleSidebar();
-                      }}
-                      className={`flex items-center px-4 py-3 rounded-md transition-colors ${
-                        isActive ? "bg-indigo-800 text-white" : "text-indigo-100 hover:bg-indigo-600"
-                      }`}
-                    >
-                      <span className="mr-3">{icon}</span>
-                      <span>{label}</span>
-                    </Link>
-                  </li>
+                  <a
+                    href={href}
+                    onClick={(e) => {
+                      e.preventDefault();   // prevent full reload
+                      router.push(href);    // do client navigation
+                      if (window.innerWidth < 768) toggleSidebar();
+                    }}
+                    className={`flex items-center px-4 py-3 rounded-md transition-colors ${
+                      isActive ? "bg-indigo-800 text-white" : "text-indigo-100 hover:bg-indigo-600"
+                    }`}
+                  >
+                    <span className="mr-3">{icon}</span>
+                    <span>{label}</span>
+                  </a>
+                </li>
                 );
               })}
             </ul>
