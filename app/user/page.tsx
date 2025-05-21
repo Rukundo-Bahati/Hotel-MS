@@ -1,5 +1,4 @@
 "use client"
-import DashboardLayout from "../components/layout/DashboardLayout"
 import { useAuth } from "../context/AuthContext"
 import { motion } from "framer-motion"
 import { Hotel, Bed, Calendar } from "lucide-react"
@@ -54,7 +53,6 @@ const UserDashboard = () => {
 
   return (
     <ProtectedRoute allowedRoles={["USER", "ADMIN"]}>
-    <DashboardLayout>
       <div className="space-y-8">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Welcome, {user?.username}!</h1>
@@ -115,7 +113,6 @@ const UserDashboard = () => {
           </div>
         </div>
       </div>
-    </DashboardLayout>
     </ProtectedRoute>
   )
 }

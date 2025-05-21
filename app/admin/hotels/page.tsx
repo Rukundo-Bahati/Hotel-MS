@@ -3,7 +3,6 @@
 import type React from "react"
 
 import { useState } from "react"
-import DashboardLayout from "../../components/layout/DashboardLayout"
 import { motion } from "framer-motion"
 import { Plus, Edit, Trash, X, Search, MapPin, Star, Phone, Filter, SlidersHorizontal, ChevronDown } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
@@ -305,7 +304,6 @@ const AdminHotels = () => {
   }
 
   return (
-    <DashboardLayout>
       <div className="space-y-6">
         <div className="flex justify-between items-center">
           <div>
@@ -958,7 +956,6 @@ const AdminHotels = () => {
           </div>
         )}
       </div>
-    </DashboardLayout>
   )
 }
 

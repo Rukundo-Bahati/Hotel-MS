@@ -1,7 +1,6 @@
 "use client"
 
 import { SetStateAction, useState } from "react"
-import DashboardLayout from "../../components/layout/DashboardLayout"
 import { motion } from "framer-motion"
 import { Calendar, Clock, X, Eye, AlertCircle, Search, Filter, SlidersHorizontal, ChevronDown, Check, Hotel, User } from 'lucide-react'
 import { useToast } from "@/hooks/use-toast"
@@ -349,7 +348,7 @@ const AdminBookings = () => {
   }
 
   return (
-    <DashboardLayout>
+
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">All Bookings</h1>
@@ -1130,7 +1129,6 @@ const AdminBookings = () => {
           </div>
         )}
       </div>
-    </DashboardLayout>
   )
 }
 

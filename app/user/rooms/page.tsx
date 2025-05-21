@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useMemo, useCallback } from "react";
-import DashboardLayout from "../../components/layout/DashboardLayout";
 import { motion } from "framer-motion";
 import { Star, Search, Filter, X, ChevronDown, ChevronUp, SlidersHorizontal } from "lucide-react";
 
@@ -196,7 +195,6 @@ const UserRooms = () => {
   }, []);
 
   return (
-    <DashboardLayout>
     <div className="p-4 space-y-4">
       {/* Search and Filter Toggle */}
       <div className="flex items-center justify-between gap-4">
@@ -253,7 +251,6 @@ const UserRooms = () => {
         )}
       </div>
     </div>
-  </DashboardLayout>
   
   );
 };

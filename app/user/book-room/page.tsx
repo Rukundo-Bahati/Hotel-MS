@@ -1,9 +1,7 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
-import DashboardLayout from "../../components/layout/DashboardLayout"
 import { motion } from "framer-motion"
 import { Calendar, Users, CreditCard, Check } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
@@ -102,7 +100,6 @@ const UserBookRoom = () => {
   }
 
   return (
-    <DashboardLayout>
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Book a Room</h1>
@@ -525,7 +522,6 @@ const UserBookRoom = () => {
           </form>
         </motion.div>
       </div>
-    </DashboardLayout>
   )
 }
 

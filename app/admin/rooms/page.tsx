@@ -351,7 +351,6 @@ const AdminRooms = () => {
     });
 
   return (
-    <DashboardLayout>
       <div className="p-6">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
           <h1 className="text-2xl font-bold mb-4 md:mb-0">Manage Rooms</h1>
@@ -931,7 +930,6 @@ const AdminRooms = () => {
           )}
         </div>
       </div>
-    </DashboardLayout>
   );
 };
 

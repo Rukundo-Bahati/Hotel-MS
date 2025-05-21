@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import DashboardLayout from "../../components/layout/DashboardLayout"
 import { motion } from "framer-motion"
 import { Plus, Edit, Trash, X, Search, Filter, ChevronDown, Eye } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
@@ -305,7 +304,6 @@ const AdminUsers = () => {
   }
 
   return (
-    <DashboardLayout>
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
@@ -841,7 +839,6 @@ const AdminUsers = () => {
           </div>
         )}
       </motion.div>
-    </DashboardLayout>
   )
 }
 

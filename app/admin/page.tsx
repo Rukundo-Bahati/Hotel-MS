@@ -95,7 +95,6 @@ const AdminDashboard = () => {
 
   return (
     <ProtectedRoute allowedRoles={["ADMIN"]}>
-    <DashboardLayout>
       <div className="space-y-8">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Welcome, {user?.username}!</h1>
@@ -276,7 +275,6 @@ const AdminDashboard = () => {
           </Link>
         </div>
       </div>
-    </DashboardLayout>
     </ProtectedRoute>
   )
 }
