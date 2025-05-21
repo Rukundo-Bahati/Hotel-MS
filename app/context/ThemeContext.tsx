@@ -1,6 +1,6 @@
-"use client"
+"use client"; // Important — this component must be a Client Component
 
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
+import { createContext, useContext, useState, useEffect, ReactNode } from "react"
 
 type Theme = "light" | "dark"
 
@@ -20,16 +20,22 @@ export const useTheme = () => {
 }
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState<Theme>(() => {
-    const savedTheme = localStorage.getItem("theme") as Theme
-    return savedTheme || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
-  })
+  const [theme, setTheme] = useState<Theme>("light") // Default to light initially
 
   useEffect(() => {
-    // Update localStorage when theme changes
-    localStorage.setItem("theme", theme)
+    // This runs only on the client
+    const savedTheme = localStorage.getItem("theme") as Theme | null
+    if (savedTheme) {
+      setTheme(savedTheme)
+    } else {
+      // If no saved theme, use system preference
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+      setTheme(prefersDark ? "dark" : "light")
+    }
+  }, [])
 
-    // Update document class for Tailwind dark mode
+  useEffect(() => {
+    localStorage.setItem("theme", theme)
     if (theme === "dark") {
       document.documentElement.classList.add("dark")
     } else {
@@ -38,7 +44,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   }, [theme])
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"))
+    setTheme((prev) => (prev === "light" ? "dark" : "light"))
   }
 
   return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>

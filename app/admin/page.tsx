@@ -1,10 +1,11 @@
 "use client"
 
+import Link from "next/link";
 import DashboardLayout from "../components/layout/DashboardLayout"
 import { useAuth } from "../context/AuthContext"
 import { motion } from "framer-motion"
 import { Hotel, Bed, Calendar, Users, TrendingUp, ArrowUpRight } from "lucide-react"
-import { Link } from "react-router-dom"
+import ProtectedRoute from "../components/ProtectedRoute";
 
 const AdminDashboard = () => {
   const { user } = useAuth()
@@ -93,6 +94,7 @@ const AdminDashboard = () => {
   }
 
   return (
+    <ProtectedRoute allowedRoles={["ADMIN"]}>
     <DashboardLayout>
       <div className="space-y-8">
         <div>
@@ -132,7 +134,7 @@ const AdminDashboard = () => {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-medium text-gray-900 dark:text-white">Recent Bookings</h2>
             <Link
-              to="/admin/bookings"
+              href="/admin/bookings"
               className="text-sm font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300 flex items-center"
             >
               View all
@@ -233,7 +235,7 @@ const AdminDashboard = () => {
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Link
-            to="/admin/hotels"
+            href="/admin/hotels"
             className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 hover:shadow-md transition-shadow"
           >
             <h3 className="text-lg font-medium text-gray-900 dark:text-white flex items-center">
@@ -243,7 +245,7 @@ const AdminDashboard = () => {
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Add, edit or remove hotels</p>
           </Link>
           <Link
-            to="/admin/rooms"
+            href="/admin/rooms"
             className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 hover:shadow-md transition-shadow"
           >
             <h3 className="text-lg font-medium text-gray-900 dark:text-white flex items-center">
@@ -253,7 +255,7 @@ const AdminDashboard = () => {
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Add, edit or remove rooms</p>
           </Link>
           <Link
-            to="/admin/bookings"
+            href="/admin/bookings"
             className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 hover:shadow-md transition-shadow"
           >
             <h3 className="text-lg font-medium text-gray-900 dark:text-white flex items-center">
@@ -263,7 +265,7 @@ const AdminDashboard = () => {
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">View and manage all bookings</p>
           </Link>
           <Link
-            to="/admin/users"
+            href="/admin/users"
             className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 hover:shadow-md transition-shadow"
           >
             <h3 className="text-lg font-medium text-gray-900 dark:text-white flex items-center">
@@ -275,6 +277,7 @@ const AdminDashboard = () => {
         </div>
       </div>
     </DashboardLayout>
+    </ProtectedRoute>
   )
 }
 

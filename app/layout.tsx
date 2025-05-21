@@ -1,20 +1,21 @@
+
 import "./globals.css"
-import { ReactNode } from "react"
+import { ThemeProvider } from "@/app/context/ThemeContext" // path to your ThemeContext file
 import { AuthProvider } from "@/app/context/AuthContext"
 
-export const metadata = {
-  title: "Hotel Booking App",
-  description: "Login and manage your bookings",
-}
-
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <AuthProvider>
-          {children}
-        </AuthProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            {children}
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
 }
+
+
+

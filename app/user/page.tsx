@@ -1,10 +1,10 @@
 "use client"
-import { Outlet } from "react-router-dom"
 import DashboardLayout from "../components/layout/DashboardLayout"
 import { useAuth } from "../context/AuthContext"
 import { motion } from "framer-motion"
 import { Hotel, Bed, Calendar } from "lucide-react"
-import { Link } from "react-router-dom"
+import Link  from "next/link"
+import ProtectedRoute from "../components/ProtectedRoute";
 
 const UserDashboard = () => {
   const { user } = useAuth()
@@ -53,6 +53,7 @@ const UserDashboard = () => {
   
 
   return (
+    <ProtectedRoute allowedRoles={["USER", "ADMIN"]}>
     <DashboardLayout>
       <div className="space-y-8">
         <div>
@@ -93,7 +94,7 @@ const UserDashboard = () => {
                 transition={{ duration: 0.3, delay: index * 0.1 + 0.3 }}
               >
                 <Link
-                  to={action.href}
+                  href={action.href}
                   className="block bg-white dark:bg-gray-800 rounded-lg shadow p-6 hover:shadow-md transition-shadow"
                 >
                   <h3 className="text-lg font-medium text-gray-900 dark:text-white">{action.name}</h3>
@@ -114,8 +115,8 @@ const UserDashboard = () => {
           </div>
         </div>
       </div>
-      <Outlet />
     </DashboardLayout>
+    </ProtectedRoute>
   )
 }
 

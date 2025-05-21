@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import Link  from "next/link"
 import { useAuth } from "../context/AuthContext"
 import { motion } from "framer-motion"
 import { useToast } from "@/hooks/use-toast"
@@ -110,7 +110,7 @@ const Register = () => {
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600 dark:text-gray-400">
             Already have an account?{" "}
-            <Link to="/login" className="text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 font-medium">
+            <Link href="/login" className="text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 font-medium">
               Sign in
             </Link>
           </p>

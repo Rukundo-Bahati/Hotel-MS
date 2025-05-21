@@ -10,6 +10,14 @@ const nextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
+  async rewrites() {
+    return [
+      {
+        source: "/:any*",
+        destination: "/",
+      },
+    ];
+  },
 }
 
 export default nextConfig

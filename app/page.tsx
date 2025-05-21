@@ -1,8 +1,8 @@
+
 "use client"
 
-import App from "./App";
-import Login from "./login/page";
+import { redirect } from "next/navigation";
 
-export default function Page() {
-  return <App />;
+export default function HomePage() {
+  redirect("/dashboard");
 }
